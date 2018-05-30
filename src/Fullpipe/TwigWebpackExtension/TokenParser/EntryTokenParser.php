@@ -39,12 +39,7 @@ abstract class EntryTokenParser extends \Twig_TokenParser
 
         if (isset($manifest[$entryName . '.' . $this->type()])) {
             $assetPath = $manifest[$entryName . '.' . $this->type()];
-            if (strpos($assetPath, 'cloudfront') !== false) {
-                $entryPath = $manifest[$entryName . '.' . $this->type()];
-            } else {
-                $entryPath = $this->publicPath . $manifest[$entryName . '.' . $this->type()];
-            }
-            $assets[] = $this->generateHtml($entryPath);
+            $assets[] = $this->generateHtml($assetPath);
         } else {
             throw new \Twig_Error_Loader(
                 'Webpack ' . $this->type() . ' entry ' . $entryName . ' exists.',
